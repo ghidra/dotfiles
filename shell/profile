@@ -1,0 +1,13 @@
+#!/bin/bash
+
+#windows manager related
+
+#set so we know where config files are located
+XDG_CONFIG_HOME="$HOME/.config"
+export XDG_CONFIG_HOME
+
+#panels for bspwm and lemon bar
+export BAR_FIFO="/tmp/bar-fifo"
+
+#append PATH
+#export PATH="$HOME/.config/bspwm:$PATH"

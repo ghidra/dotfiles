@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+echo -e "P0" > "$BAR_FIFO"
+
+while true; do
+  update_bar_NumPackagesWithUpdates
+  sleep 300;
+done
+

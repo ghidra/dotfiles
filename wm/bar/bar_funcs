@@ -1,0 +1,116 @@
+#!/usr/bin/env bash
+
+bar_Battery() {
+  BATTERY=$(acpi -b | sed -r 's/Battery [0-9]+: (Dis|Cha|Full)[a-zA-Z,]+\s*([0-9]+)\%.*/\1\2/' | sed -r 's/Dis/-/ ; s/(Cha|Full)/+/')
+  echo -n "$BATTERY"
+}
+export -f bar_Battery
+
+update_bar_Battery() {
+  echo -e "B$(bar_Battery)" > "$BAR_FIFO"
+}
+export -f update_bar_Battery
+
+bar_NumPackagesWithUpdates() {
+  NUM_PACKAGES=$(pacaur -Syq > /dev/null && pacaur -Qqu | wc -l)
+  echo -n "$NUM_PACKAGES"
+}
+export -f bar_NumPackagesWithUpdates
+
+update_bar_NumPackagesWithUpdates() {
+  echo -e "P$(bar_NumPackagesWithUpdates)" > "$BAR_FIFO"
+}
+export -f update_bar_NumPackagesWithUpdates
+
+bar_Update() {
+  pacaur -Syyu
+}
+export -f bar_Update
+
+bar_Time() {
+  TIME=$(date "+%T")
+  echo -n "$TIME"
+}
+export -f bar_Time
+
+update_bar_Time() {
+  echo -e "S$(bar_Time)" > "$BAR_FIFO"
+}
+export -f update_bar_Time
+
+bar_Date() {
+  DATE=$(date "+%a %b %d")
+  echo -n "$DATE"
+}
+export -f bar_Date
+
+update_bar_Date() {
+  echo -e "D$(bar_Date)" > "$BAR_FIFO"
+}
+export -f update_bar_Date
+
+bar_MasterVolume() {
+  VOLUME=$(awk -F"[][]" '/dB/ { print $2 }' <(amixer -c 1 sget Master))
+  echo -n "$VOLUME"
+}
+export -f bar_MasterVolume
+
+update_bar_MasterVolume() {
+  echo -e "V$(bar_MasterVolume)" > "$BAR_FIFO"
+}
+export -f update_bar_MasterVolume
+
+bar_DisplayBrightness() {
+  DISPLAY_BRIGHTNESS_PERCENT=$(get_brightness_percent)
+  DISPLAY_BRIGHTNESS=$(float_mul_int $DISPLAY_BRIGHTNESS_PERCENT 100)
+  echo -n "$DISPLAY_BRIGHTNESS"
+}
+export -f bar_DisplayBrightness
+
+update_bar_DisplayBrightness() {
+  echo -e "DB$(bar_DisplayBrightness)" > "$BAR_FIFO"
+}
+export -f update_bar_DisplayBrightness
+
+bar_CPU() {
+  CPU=$(top -bn2 -p 1 | grep Cpu | tail -n4 | sed 's/^.* \([0-9]*\)\[.*$/\1/' | tr "\\n" "/" | sed 's/\/$//')
+  echo -n $CPU
+}
+export -f bar_CPU
+
+update_bar_CPU() {
+  echo -e "C$(bar_CPU)" > "$BAR_FIFO"
+}
+export -f update_bar_CPU
+
+bar_RAM() {
+  float_mul_int 100 $(float_div $(free -m | grep ^Mem | tr -s " " | cut -d " " -f 3) $(free -m | grep ^Mem | tr -s " " | cut -d " " -f 2))
+  echo -n $RAM
+}
+export -f bar_RAM
+
+update_bar_RAM() {
+  echo -e "R$(bar_RAM)" > "$BAR_FIFO"
+}
+export -f update_bar_RAM
+
+bar_MPD() {
+  MPC_OUTPUT="$(mpc current)"
+  if [[ -z "$MPC_OUTPUT" ]]; then
+    return
+  else
+    echo -n $MPC_OUTPUT
+  fi
+}
+export -f bar_MPD
+
+update_bar_MPD() {
+  MPD_STATUS=$(bar_MPD)
+  echo -e "Z$MPD_STATUS" > "$BAR_FIFO"
+}
+export -f update_bar_MPD
+
+# TODO: processor usage, memory usage, network usage
+
+# TODO: processor usage, memory usage, network usage
+

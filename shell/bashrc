@@ -1,0 +1,95 @@
+#!/bin/bash
+
+#laptop
+
+export IS_PORTABLE="1"
+
+# If not running interactively, don't do anything
+[[ $- != *i* ]] && return
+
+#directory
+
+alias ls='ls --color=auto'
+
+alias lk='ls -lSr' # order by filesize reversed
+alias lt='ls -ltr' # order by file modified time
+alias lc='ls -ltcr' # order by filectime
+alias lu='ls -ltur' # order by file access time
+alias ls='ls -h --color --group-directories-first' # flat view w/ directories first
+alias l='ls -h --color --group-directories-first' # same as above
+alias ll='ls -lv --group-directories-first' # non-flat view
+alias lm='ll | more'
+
+
+PS1='[\u@\h \W]\$ '
+
+# git aliases
+alias gs="git status"
+alias gl="git log"
+alias ga="git add -A"
+alias gc="git commit -m"
+alias gac="git add -A && git commit -m"
+alias gp="git push"
+alias gpl="git pull"
+
+#my app aliases
+
+alias edit='nano'
+
+#apps
+
+alias red='redshift -l  41.1355:-73.7966&'
+
+#my configure aliases
+
+alias a='edit ~/.bashrc'
+alias startup='edit ~/.xinitrc'
+alias trackpad='edit /etc/X11/xorg.conf.d/50-synaptics.conf'
+alias xorgconf='edit /etc/X11/xorg.conf'
+
+#arch helpers
+
+alias aurmake='makepkg -sri'
+alias arch-update="tmux -c 'pacaur --noconfirm --noedit -Syyu'" # update all packages
+
+#force wifi
+
+alias wifihome='sudo netctl start Home'
+alias wifiwork='sudo netctl start Mill'
+alias wificheck='ping -c 3 www.google.com'
+
+#reload
+
+alias re='source ~/.bashrc'
+
+#-----------
+
+# the path to other dotfiles
+export DOTFILES_PATH="$HOME/dotfiles"
+
+bspwm_padding() {
+  NEW_PADDING="$1"
+  if [[ ${1:0:1} = "+" ]]; then
+    NEW_PADDING=$((`bspc config -d focused top_padding` + ${1:1} ))
+  fi
+  if [[ ${1:0:1} = "-" ]]; then
+    NEW_PADDING=$((`bspc config -d focused top_padding` - ${1:1} ))
+  fi
+  bspc config -d focused top_padding $NEW_PADDING
+  bspc config -d focused left_padding $NEW_PADDING
+  bspc config -d focused right_padding $NEW_PADDING
+  bspc config -d focused bottom_padding $NEW_PADDING
+}
+export -f bspwm_padding
+
+XRES_FILE="$HOME/.Xresources"
+
+export BAR_HEIGHT="36"
+export BAR_FIFO="$HOME/.bar_fifo"
+export BAR_FONT_FAMILY="$PRIMARY_FONT_FAMILY_WITH_SIZE"
+export BAR_ICON_FONT_FAMILY="$ICON_FONT_FAMILY_WITH_SIZE"
+
+export WINDOW_GAP="50"
+export BORDER_WIDTH="1"
+
+source "$DOTFILES_PATH/wm/bar/bar_funcs"

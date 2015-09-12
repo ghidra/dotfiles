@@ -1,0 +1,37 @@
+#! /bin/sh
+
+# If, for some reason, you have a binary called "bar_init" that happens to run
+# all the time, you're going to have some issues with this one.
+if [ $(pgrep -cx bar_init) -gt 1 ] ; then
+	printf "%s\n" "The bar is already running." >&2
+	exit 1
+fi
+
+trap 'trap - TERM; kill 0' INT TERM QUIT EXIT
+
+[ -e "$BAR_FIFO" ] && rm "$BAR_FIFO"
+mkfifo "$BAR_FIFO"
+
+bspc config -m $(bspc query -M | head -n 1) top_padding "$BAR_HEIGHT"
+
+bspc control --subscribe > "$BAR_FIFO" &
+"$DOTFILES_PATH/wm/bar/bar_time" &
+"$DOTFILES_PATH/wm/bar/bar_date" &
+"$DOTFILES_PATH/wm/bar/bar_pacman" &
+"$DOTFILES_PATH/wm/bar/bar_cpu" &
+"$DOTFILES_PATH/wm/bar/bar_ram" &
+"$DOTFILES_PATH/wm/bar/bar_mpd" &
+
+if [ -z "$IS_PORTABLE" ]; then
+  :
+else
+  "$DOTFILES_PATH/wm/bar/bar_volume" &
+  "$DOTFILES_PATH/wm/bar/bar_brightness" &
+  "$DOTFILES_PATH/wm/bar/bar_battery" &
+fi
+
+. $HOME/.config/bar/bar_colors
+
+cat "$BAR_FIFO" | $HOME/.config/bar/bar_format | lemonbar -d -u "$BORDER_WIDTH" -g 1920x"$BAR_HEIGHT"+0+0 -f "$BAR_FONT_FAMILY" -f "$BAR_ICON_FONT_FAMILY" -F "$COLOR_FOREGROUND" -B "$COLOR_BACKGROUND" &
+
+wait
