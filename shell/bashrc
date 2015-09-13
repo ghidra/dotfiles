@@ -1,11 +1,18 @@
 #!/bin/bash
-
+#goes in $HOME
 #laptop
 
 export IS_PORTABLE="1"
 
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
+
+#source my sensitive data for use in scripts
+#export HOMEFTPPATH=""
+#export HOMESERVERPATH=""
+#export SERVERUSER=""
+#export SERVERSUSER=""
+source "$HOME/.sensitive.sh"
 
 #directory
 
@@ -35,10 +42,17 @@ alias gpl="git pull"
 #my app aliases
 
 alias edit='nano'
-
-#apps
-
+alias sublime='/opt/sublime-text/sublime_text'
 alias red='redshift -l  41.1355:-73.7966&'
+
+#server
+alias unicron='ssh  $SERVERSUSER@$HOMESERVERPATH'
+alias unicron_remote='ssh $SERVERSUSER@$HOMEFTPPATH'
+alias mountalpha='sshfs $SERVERUSER@$HOMESERVERPATH:/media/alpha ~/alpha -o reconnect -C -o workaround=all'
+alias unmountalpha='fusermount -u ~/alpha'
+
+#misc
+#alias printscreen='sleep 10; import -window root screenshot.png'
 
 #my configure aliases
 
@@ -51,6 +65,12 @@ alias xorgconf='edit /etc/X11/xorg.conf'
 
 alias aurmake='makepkg -sri'
 alias arch-update="tmux -c 'pacaur --noconfirm --noedit -Syyu'" # update all packages
+
+#path
+export PATH="$PATH:$HOME/projects/urho/urho3d"
+export URHO3D_HOME="$HOME/projects/urho/Urho_DYN"
+#export PATH="$PATH:$HOME/projects/urho/urho3d:$HOME/Android/Sdk/tools:$HOME/Android/Sdk/platform-tools"
+#export ANDROID_NDK="/opt/android-studio/bin/studio.sh"
 
 #force wifi
 
@@ -84,12 +104,14 @@ export -f bspwm_padding
 
 XRES_FILE="$HOME/.Xresources"
 
-export BAR_HEIGHT="36"
+export BAR_HEIGHT="16"
 export BAR_FIFO="$HOME/.bar_fifo"
 export BAR_FONT_FAMILY="$PRIMARY_FONT_FAMILY_WITH_SIZE"
 export BAR_ICON_FONT_FAMILY="$ICON_FONT_FAMILY_WITH_SIZE"
 
-export WINDOW_GAP="50"
+export WINDOW_GAP="10"
 export BORDER_WIDTH="1"
 
+
+source "$DOTFILES_PATH/shell/funcs.sh"
 source "$DOTFILES_PATH/wm/bar/bar_funcs"

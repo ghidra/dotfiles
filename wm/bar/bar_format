@@ -2,7 +2,9 @@
 #
 # Example panel for LemonBoy's bar
 
-. $HOME/.config/bar/bar_colors
+#. $HOME/.config/bar/bar_colors
+
+. $DOTFILES_PATH/wm/bar/bar_colors
 
 num_mon=$(bspc query -M | wc -l)
 
