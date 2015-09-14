@@ -104,6 +104,13 @@ export -f bspwm_padding
 
 XRES_FILE="$HOME/.Xresources"
 
+# interface environment variables
+PRIMARY_FONT_XRESOURCES=$(grep "#define primaryfont xft:" "$XRES_FILE" | grep -v "/\*" | head -n 1)
+export PRIMARY_FONT_FAMILY=${PRIMARY_FONT_XRESOURCES:24:-3}
+export PRIMARY_FONT_FAMILY_WITH_SIZE=${PRIMARY_FONT_XRESOURCES:24}
+export PRIMARY_FONT_SIZE=$(echo $PRIMARY_FONT_FAMILY_WITH_SIZE | sed 's/.*\-//')
+
+
 export BAR_HEIGHT="16"
 export BAR_FIFO="$HOME/.bar_fifo"
 export BAR_FONT_FAMILY="$PRIMARY_FONT_FAMILY_WITH_SIZE"

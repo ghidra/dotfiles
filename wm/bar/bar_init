@@ -33,7 +33,13 @@ fi
 "$DOTFILES_PATH/wm/bar/bar_colors"
 #. $HOME/.config/bar/bar_colors
 
+#screen width
+LINE=`xrandr -q | grep Screen`
+WIDTH=`echo ${LINE} | awk '{ print $8 }'`
+#HEIGHT=`echo ${LINE} | awk '{ print $10 }' | awk -F"," '{ print $1 }'`
+#echo HEIGHT = ${HEIGHT}
+
 #cat "$BAR_FIFO" | $HOME/.config/bar/bar_format | lemonbar -d -u "$BORDER_WIDTH" -g 1920x"$BAR_HEIGHT"+0+0 -f "$BAR_FONT_FAMILY" -f "$BAR_ICON_FONT_FAMILY" -F "$COLOR_FOREGROUND" -B "$COLOR_BACKGROUND" &
-cat "$BAR_FIFO" | $DOTFILES_PATH/wm/bar/bar_format | lemonbar -d -u "$BORDER_WIDTH" -g 1920x"$BAR_HEIGHT"+0+0 -f "$BAR_FONT_FAMILY" -f "$BAR_ICON_FONT_FAMILY" -F "$COLOR_FOREGROUND" -B "$COLOR_BACKGROUND" &
+cat "$BAR_FIFO" | $DOTFILES_PATH/wm/bar/bar_format | lemonbar -d -u "$BORDER_WIDTH" -g $(WIDTH) x"$BAR_HEIGHT"+0+0 -f "$BAR_FONT_FAMILY" -f "$BAR_ICON_FONT_FAMILY" -F "$COLOR_FOREGROUND" -B "$COLOR_BACKGROUND" &
 
 wait

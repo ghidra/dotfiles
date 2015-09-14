@@ -1,0 +1,25 @@
+/* a safe fallback if things go awry */
+
+#define primaryletterspace 0
+
+#define primaryfont xft:gohufont-9
+#define secondaryfont xft:Open Sans-9
+#define iconfont xft:stlarch-9
+
+*font: primaryfont
+*faceName: primaryfont
+*boldFont: primaryfont
+*letterSpace: primaryletterspace
+*scrollBar: false
+*cursorUnderline: true
+*cursorBlink: true
+*termName: rxvt-unicode
+*intensityStyles: true
+*utf8: 2
+
+*depth: 32
+
+URxvt.internalBorder: 10
+URxvt.font: primaryfont
+
+#include ".Xresources.colors"
