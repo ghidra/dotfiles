@@ -21,7 +21,10 @@ fi
 
 if [ -f "$userresources" ]; then
     xrdb -merge "$userresources"
+fi
 
+if [ -f $HOME/.Xresources.colors ]; then
+    xrdb -merge $HOME/.Xresources.colors
 fi
 
 if [ -f "$usermodmap" ]; then
@@ -43,7 +46,7 @@ fi
 #xterm -geometry 80x20+494-0 &
 #exec xterm -geometry 80x66+0+0 -name login
 
-#"$DOTFILES_PATH/wm/bar/bar_watcher" &
+"$DOTFILES_PATH/wm/bar/bar_watcher" &
 sxhkd &
 urxvt &
 exec bspwm

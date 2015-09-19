@@ -6,20 +6,18 @@
 #define secondaryfont xft:Open Sans-9
 #define iconfont xft:stlarch-9
 
-*font: primaryfont
-*faceName: primaryfont
-*boldFont: primaryfont
-*letterSpace: primaryletterspace
-*scrollBar: false
-*cursorUnderline: true
-*cursorBlink: true
-*termName: rxvt-unicode
-*intensityStyles: true
-*utf8: 2
+URxvt*font: primaryfont
+URxvt*faceName: primaryfont
+URxvt*boldFont: primaryfont
+URxvt*letterSpace: primaryletterspace
+URxvt*scrollBar: false
+URxvt*cursorUnderline: true
+URxvt*cursorBlink: true
+URxvt*termName: rxvt-unicode
+URxvt*intensityStyles: true
+URxvt*utf8: 2
 
-*depth: 32
+URxvt*depth: 32
 
 URxvt.internalBorder: 10
 URxvt.font: primaryfont
-
-#include ".Xresources.colors"

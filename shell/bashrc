@@ -119,6 +119,9 @@ export BAR_ICON_FONT_FAMILY="$ICON_FONT_FAMILY_WITH_SIZE"
 export WINDOW_GAP="10"
 export BORDER_WIDTH="1"
 
-
 source "$DOTFILES_PATH/shell/funcs.sh"
 source "$DOTFILES_PATH/wm/bar/bar_funcs"
+
+#since im not using the base 16 to load colors, I might need to do it manually here for now
+export COLOR_FOREGROUND="#ff$(get_color 05)"
+export COLOR_BACKGROUND="#ff$(get_color 00)"
