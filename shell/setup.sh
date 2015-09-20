@@ -11,3 +11,9 @@ cd /usr/share/fonts/bitmap
 fc-cache && mkfontscale && mkfontdir
 xset fp+ /usr/share/fonts/bitmap
 fc-cache -fv
+
+#firefox
+cd ~/.mozilla/firefox/<profile>
+#check if chrome exisits, make it
+cd chrome
+ln -s dotfiles/apps/firefox/firefox.css userChrome.css
