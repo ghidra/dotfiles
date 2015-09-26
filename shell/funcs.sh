@@ -76,7 +76,9 @@ set_percent_brightness()
 {
   MAX_BRIGHTNESS=$(get_max_brightness)
   NEW_BRIGHTNESS=$(float_mul_int $1 $MAX_BRIGHTNESS)
-  sudo -H -u root bash -c "echo $NEW_BRIGHTNESS > /sys/class/backlight/intel_backlight/brightness"
+  #echo $NEW_BRIGHTNESS
+  #sudo -H -u root bash -c "echo $NEW_BRIGHTNESS > /sys/class/backlight/intel_backlight/brightness"
+  bash -c "echo $NEW_BRIGHTNESS | sudo tee /sys/class/backlight/intel_backlight/brightness"
 }
 export -f set_percent_brightness
 

@@ -1,5 +1,19 @@
 
+pacman -S alsa-utils
+pacman -S feh #this is a wallpaper thing
+pacman -S unzip
+sudo pacman -S xorg-xev #for finding the keys
 
+#brightness on the laptop is here:
+#/sys/class/backlight/intel_backlight/brightness
+#i need to set the folder to use no password in 
+#sudo visudo
+#add this line:
+#(username) ALL=NOPSSWD: /usr/bin/tee /sys/class/backlight/intel_backlight/brighness
+
+#wallpaper
+#feh set bg
+#feh --bg-scale /path/to/image.file
 
 mkdir ~/aur_builds
 

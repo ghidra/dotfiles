@@ -49,16 +49,16 @@ update_bar_Date() {
 }
 export -f update_bar_Date
 
-#bar_MasterVolume() {
-#  VOLUME=$(awk -F"[][]" '/dB/ { print $2 }' <(amixer -c 1 sget Master))
-#  echo -n "$VOLUME"
-#}
-#export -f bar_MasterVolume
+bar_MasterVolume() {
+  VOLUME=$(awk -F"[][]" '/dB/ { print $2 }' <(amixer -c 0 sget Master))
+  echo -n "$VOLUME"
+}
+export -f bar_MasterVolume
 
-#update_bar_MasterVolume() {
-#  echo -e "V$(bar_MasterVolume)" > "$BAR_FIFO"
-#}
-#export -f update_bar_MasterVolume
+update_bar_MasterVolume() {
+  echo -e "V$(bar_MasterVolume)" > "$BAR_FIFO"
+}
+export -f update_bar_MasterVolume
 
 bar_DisplayBrightness() {
   DISPLAY_BRIGHTNESS_PERCENT=$(get_brightness_percent)

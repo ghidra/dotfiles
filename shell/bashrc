@@ -2,7 +2,7 @@
 #goes in $HOME
 #laptop
 
-export IS_PORTABLE="1"
+#export IS_PORTABLE="1"
 
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
@@ -61,8 +61,12 @@ alias startup='edit ~/.xinitrc'
 alias trackpad='edit /etc/X11/xorg.conf.d/50-synaptics.conf'
 alias xorgconf='edit /etc/X11/xorg.conf'
 
-#arch helpers
+#helpers
+alias im='feh -g 640x480 -d -S filename .'
+alias keycodes='xev | grep -A2 --line-buffered "^KeyRelease" | sed -n "/keycode /s/^.*keycode \([0-9]*\).* (.*, \(.*\)).*$/\1 \2/p" '
 
+#arch helpers
+alias volume='alsamixer'
 alias aurmake='makepkg -sri'
 alias arch-update="tmux -c 'pacaur --noconfirm --noedit -Syyu'" # update all packages
 
@@ -125,3 +129,8 @@ source "$DOTFILES_PATH/wm/bar/bar_funcs"
 #since im not using the base 16 to load colors, I might need to do it manually here for now
 export COLOR_FOREGROUND="#ff$(get_color 05)"
 export COLOR_BACKGROUND="#ff$(get_color 00)"
+
+# allow a per-device script that is pulled in
+if [ -a "$HOME/.bashrc_env" ]; then
+  . "$HOME/.bashrc_env"
+fi

@@ -89,3 +89,16 @@ super + space
 # make sxhkd reload its configuration files:
 super + Escape
 	pkill -USR1 -x sxhkd
+
+#
+# lenovo keys
+#
+
+XF86MonBrightnessUp
+	add_percent_brightness 0.1
+
+XF86MonBrightnessDown
+	sub_percent_brightness 0.1
+
+XF86Audio{Raise,Lower}Volume
+	amixer sset Master {1+,1-} unmute
