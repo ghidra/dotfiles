@@ -50,6 +50,10 @@ alias unicron='ssh  $SERVERSUSER@$HOMESERVERPATH'
 alias unicron_remote='ssh $SERVERSUSER@$HOMEFTPPATH'
 alias mountalpha='sshfs $SERVERUSER@$HOMESERVERPATH:/media/alpha ~/alpha -o reconnect -C -o workaround=all'
 alias unmountalpha='fusermount -u ~/alpha'
+alias mountbeta="sshfs $SERVERUSER@$HOMESERVERPATH:/media/beta/alpha ~/beta -o reconnect -C -o workaround=all"
+alias unmountbeta="fusermount -u ~/beta"
+
+alias bu="rsync -krave 'ssh -p 22' --exclude '/home/$SERVERUSER/projects/.*' --exclude-from '/home/$SERVERUSER/projects/exclude.txt' /home/$SERVERUSER/projects $SERVERUSER@$HOMESERVERPATH:/media/alpha/jrg/projects/work/local"
 
 #misc
 #alias printscreen='sleep 10; import -window root screenshot.png'
