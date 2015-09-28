@@ -41,7 +41,15 @@ alias gpl="git pull"
 
 #my app aliases
 
-alias edit='nano'
+alias edit="vim"
+if [ -f "/usr/local/bin/nvim" ]; then
+  # if we've got neovim around, let's use it!
+  alias _vim="vim"
+  alias vim="nvim"
+  alias edit="nvim"
+fi
+
+#alias edit='nano'
 alias sublime='/opt/sublime-text/sublime_text'
 alias red='redshift -l  41.1355:-73.7966&'
 
