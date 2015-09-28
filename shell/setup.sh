@@ -1,8 +1,9 @@
 
+pacman -S vim-minimal
 pacman -S alsa-utils
 pacman -S feh #this is a wallpaper thing
 pacman -S unzip
-sudo pacman -S xorg-xev #for finding the keys
+pacman -S xorg-xev #for finding the keys
 
 #brightness on the laptop is here:
 #/sys/class/backlight/intel_backlight/brightness
