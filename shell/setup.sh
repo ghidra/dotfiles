@@ -27,6 +27,25 @@ fc-cache && mkfontscale && mkfontdir
 xset fp+ /usr/share/fonts/bitmap
 fc-cache -fv
 
+#-------------------------------------
+#OTHER FONTS TO MAKE FIREFOX NOT LOOK LIKE SHIT
+#edit /etc/pacman.conf
+
+#[infinality-bundle]
+#Server = http://bohoomil.com/repo/$arch
+#[infinality-bundle-fonts]
+#Server = http://bohoomil.com/repo/fonts
+
+#Next, import and sign the key:
+sudo pacman-key --init
+sudo dirmngr < /dev/null
+
+sudo pacman-key -r 962DDE58
+sudo pacman-key --lsign-key 962DDE58
+sudo pacman -Syyu
+sudo pacman -S infinality-bundle
+#-------------------------------------
+
 #firefox
 cd ~/.mozilla/firefox/<profile>
 #check if chrome exisits, make it
