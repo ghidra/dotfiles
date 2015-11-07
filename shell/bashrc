@@ -83,7 +83,7 @@ alias aurmake='makepkg -sri'
 alias arch-update="tmux -c 'pacaur --noconfirm --noedit -Syyu'" # update all packages
 
 #path
-export PATH="$PATH:$HOME/projects/urho/urho3d"
+export PATH="$PATH:$HOME/projects/urho/Urho3d"
 export URHO3D_HOME="$HOME/projects/urho/Urho_DYN"
 #export PATH="$PATH:$HOME/projects/urho/urho3d:$HOME/Android/Sdk/tools:$HOME/Android/Sdk/platform-tools"
 #export ANDROID_NDK="/opt/android-studio/bin/studio.sh"
