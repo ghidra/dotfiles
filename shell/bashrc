@@ -22,8 +22,8 @@ alias lk='ls -lSr' # order by filesize reversed
 alias lt='ls -ltr' # order by file modified time
 alias lc='ls -ltcr' # order by filectime
 alias lu='ls -ltur' # order by file access time
-alias ls='ls -h --color --group-directories-first' # flat view w/ directories first
-alias l='ls -h --color --group-directories-first' # same as above
+alias ls='ls -h --color=no --group-directories-first' # flat view w/ directories first
+alias l='ls -h --color=no --group-directories-first' # same as above
 alias ll='ls -lv --group-directories-first' # non-flat view
 alias lm='ll | more'
 
@@ -62,6 +62,7 @@ alias mountbeta="sshfs $SERVERUSER@$HOMESERVERPATH:/media/beta/alpha ~/beta -o r
 alias unmountbeta="fusermount -u ~/beta"
 
 alias bu="rsync -krave 'ssh -p 22' --exclude '/home/$SERVERUSER/projects/.*' --exclude-from '/home/$SERVERUSER/projects/exclude.txt' /home/$SERVERUSER/projects $SERVERUSER@$HOMESERVERPATH:/media/alpha/jrg/projects/work/local"
+alias pu="rsync -krave 'ssh -p 22' $SERVERUSER@$HOMESERVERPATH:/media/alpha/jrg/projects/work/local/projects/ /home/$SERVERUSER/projects/"
 
 #misc
 #alias printscreen='sleep 10; import -window root screenshot.png'

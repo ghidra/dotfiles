@@ -4,6 +4,17 @@ pacman -S alsa-utils
 pacman -S feh #this is a wallpaper thing
 pacman -S unzip
 pacman -S xorg-xev #for finding the keys
+pacman -S rsync
+
+#i need to allow multilib, specifically to install steam
+#sudo vim /etc/pacman.conf
+#uncomment
+#[multilib]
+#Include = /etc/pacman.d/mirrorlist
+#then pacman -Syu
+
+sudo pacman -S lib32-asla-plugins
+sudo pacman -S steam
 
 #brightness on the laptop is here:
 #/sys/class/backlight/intel_backlight/brightness
