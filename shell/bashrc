@@ -39,6 +39,17 @@ alias gac="git add -A && git commit -m"
 alias gp="git push"
 alias gpl="git pull"
 
+function g
+{
+        if [ -n "$1" ];then
+                git add -A .
+                git commit -m "$1"
+                git push origin master
+        else
+                echo "Need a commit message"
+        fi
+}
+
 #my app aliases
 
 alias edit="vim"
