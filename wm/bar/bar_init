@@ -14,7 +14,7 @@ mkfifo "$BAR_FIFO"
 
 bspc config -m $(bspc query -M | head -n 1) top_padding "$BAR_HEIGHT"
 
-bspc control --subscribe > "$BAR_FIFO" &
+bspc subscribe report > "$BAR_FIFO" &
 "$DOTFILES_PATH/wm/bar/bar_time" &
 "$DOTFILES_PATH/wm/bar/bar_date" &
 #"$DOTFILES_PATH/wm/bar/bar_pacman" &
