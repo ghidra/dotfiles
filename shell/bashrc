@@ -12,6 +12,8 @@
 #export HOMESERVERPATH=""
 #export SERVERUSER=""
 #export SERVERSUSER=""
+#export NGFTPUSER=""
+#export NGFTPPATH=""
 source "$HOME/.sensitive.sh"
 
 #directory
@@ -38,6 +40,7 @@ alias gc="git commit -m"
 alias gac="git add -A && git commit -m"
 alias gp="git push"
 alias gpl="git pull"
+alias gpull="git pull origin master"
 
 function g
 {
@@ -67,13 +70,27 @@ alias red='redshift -l  41.1355:-73.7966&'
 #server
 alias unicron='ssh  $SERVERSUSER@$HOMESERVERPATH'
 alias unicron_remote='ssh $SERVERSUSER@$HOMEFTPPATH'
-alias mountalpha='sshfs $SERVERUSER@$HOMESERVERPATH:/media/alpha ~/alpha -o reconnect -C -o workaround=all'
-alias unmountalpha='fusermount -u ~/alpha'
-alias mountbeta="sshfs $SERVERUSER@$HOMESERVERPATH:/media/beta/alpha ~/beta -o reconnect -C -o workaround=all"
-alias unmountbeta="fusermount -u ~/beta"
+alias mountalpha="sshfs $SERVERUSER@$HOMESERVERPATH:/media/alpha ~/mnt/alpha -o reconnect -C"
+alias unmountalpha='fusermount -u ~/mnt/alpha'
+alias mountbeta="sshfs $SERVERUSER@$HOMESERVERPATH:/media/beta ~/mnt/beta -o reconnect -C"
+alias unmountbeta="fusermount -u ~/mnt/beta"
+alias mountgamma="sshfs $SERVERUSER@$HOMESERVERPATH:/media/gamma ~/mnt/gamma -o reconnect -C"
+alias unmountgamma="fusermount -u ~/mnt/gamma"
 
 alias bu="rsync -krave 'ssh -p 22' --exclude '/home/$SERVERUSER/projects/.*' --exclude-from '/home/$SERVERUSER/projects/exclude.txt' /home/$SERVERUSER/projects $SERVERUSER@$HOMESERVERPATH:/media/alpha/jrg/projects/work/local"
 alias pu="rsync -krave 'ssh -p 22' $SERVERUSER@$HOMESERVERPATH:/media/alpha/jrg/projects/work/local/projects/ /home/$SERVERUSER/projects/"
+
+#NG FTP
+
+function toftp
+{
+	if [ -n "$1" ] && [ -n "$2"  ] && [ -n "$3" ];then
+		curl -T $1 ftp://$NGFTPPATH$2 --user $NGFTPUSER:$3
+	else
+		echo "localpath ftppath password"
+	fi
+}
+alias connectftp="ftp $NGFTPPATH"
 
 #misc
 #alias printscreen='sleep 10; import -window root screenshot.png'
@@ -96,7 +113,7 @@ alias arch-update="tmux -c 'pacaur --noconfirm --noedit -Syyu'" # update all pac
 
 #path
 export PATH="$PATH:$HOME/projects/urho/Urho3d"
-export URHO3D_HOME="$HOME/projects/urho/Urho_DYN"
+export URHO3D_HOME="$HOME/projects/urho/urho_DYN"
 #export PATH="$PATH:$HOME/projects/urho/urho3d:$HOME/Android/Sdk/tools:$HOME/Android/Sdk/platform-tools"
 #export ANDROID_NDK="/opt/android-studio/bin/studio.sh"
 
@@ -106,6 +123,12 @@ alias wifihome='sudo netctl start Home'
 alias wifiwork='sudo netctl start Mill'
 alias wificheck='ping -c 3 www.google.com'
 
+#apache
+
+alias startapache='systemctl start httpd.service'
+alias stopapache='systemctl stop httpd.service'
+alias restartapache='systemctl restart httpd.service'
+alias apachealiases='sudo vim /etc/httpd/conf/extra/localdev.conf'
 #reload
 
 alias re='source ~/.bashrc'

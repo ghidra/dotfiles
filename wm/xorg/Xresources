@@ -21,3 +21,5 @@ URxvt*depth: 32
 
 URxvt.internalBorder: 10
 URxvt.font: primaryfont
+
+URxvt.perl-ext-common: ...,tabbed,...
