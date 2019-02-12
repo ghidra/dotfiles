@@ -1,0 +1,6 @@
+@lxpanel --profile LXDE
+@pcmanfm --desktop --profile LXDE
+@xscreensaver -no-splash
+
+@redshift
+@urxvt -geometry 240x40+0+0

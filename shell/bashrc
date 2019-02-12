@@ -134,6 +134,13 @@ alias apachealiases='sudo vim /etc/httpd/conf/extra/localdev.conf'
 alias re='source ~/.bashrc'
 
 #-----------
+#VM
+alias editwin='EDITOR=vim virsh --connect qemu:///system edit win10'
+alias editqemu='sudo vim /etc/libvirt/qemu.conf'
+alias restartvm='sudo systemctl restart libvirtd.service'
+alias vm='virt-manager'
+#-----------
+
 
 # the path to other dotfiles
 export DOTFILES_PATH="$HOME/dotfiles"
